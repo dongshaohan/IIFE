@@ -7,25 +7,28 @@ IIFE（immediately-invoked function expression），即立刻执行函数表达�
 
 ###函数声明
 使用function关键字声明一个函数，再指定一个函数名，叫函数声明。
-	
-	function name () {
-		// ...
-	}
+```javascript
+function name () {
+	// ...
+}
+```
 
 ###函数表达式
 使用function关键字声明一个函数，但未给函数命名，最后将匿名函数赋予一个变量，叫函数表达式，这是最常见的函数表达式语法形式。
-
-	var name = function () {
-		// ...
-	}
+```javascript
+var name = function () {
+	// ...
+}
+```
 
 ###匿名函数
 使用function关键字声明一个函数，但未给函数命名，所以叫匿名函数。匿名函数属于函数表达式，匿名函数有很多作用，赋予一个变量则创建函数，
 赋予一个事件则成为事件处理程序或创建闭包等等。
-	
-	function () {
-		// ...
-	}
+```javascript
+function () {
+	// ...
+}
+```
 
 ###函数声明和函数表达式区别
 * Javascript引擎在解析代码时，在当前作用域下会`函数声明提升`，也就是说无论函数声明的位置在哪，都能够优先调用。
