@@ -34,15 +34,17 @@ function () {
 * `函数表达式`后面可以加括号立即调用该函数，函数声明不可以，只能以xxx()形式调用。如下：
 
 ```javascript
-name();  // 正常，因为函数声明提升
+name();  
 function name () {
-	// ...
+	console.log('Hello World');
 }
+// 正常，因为函数声明提升
 
-name();  // 报错，变量name还未保存对函数的引用，函数调用必须在函数表达式之后
+name();  
 var name = function () {
-	// ...
+	console.log('Hello World');
 }
+// 报错，变量name还未保存对函数的引用，函数调用必须在函数表达式之后
 
 var name = function () {
 	console.log('Hello World');
@@ -60,3 +62,35 @@ function () {
 // 语法错误，虽然匿名函数属于函数表达式，但是未进行赋值操作
 // javascript引擎将开头的function关键字当做函数声明，所以报错，要求需要一个函数名
 ```
+###原理
+在理解了一些函数基本概念后，我们了解到只有`函数表达式`才能够立即执行。
+那`(function (){})()`和`(function (){}())`是不是一个括号包裹匿名函数，并后面加个括号立即调用函数呢？如下：
+
+```javascript
+(function () {
+    console.log('Hello World'); // 输出Hello World，使用（）运算符
+})();
+  
+(function () {
+    console.log('Hello World'); // 输出Hello World，使用（）运算符
+}());
+  
+!function () {
+    console.log('Hello World'); // 输出Hello World，使用！运算符
+}();
+  
++function () {
+    console.log('Hello World'); // 输出Hello World，使用+运算符
+}();
+  
+-function () {
+    console.log('Hello World'); // 输出Hello World，使用-运算符
+}();
+  
+var fn = function () {
+    console.log('Hello World'); // 输出Hello World，使用=运算符
+}();
+```
+可以看到输出结果，在function前面加！、+、 -甚至是逗号等到都可以起到函数定义后立即执行的效果，而（）、！、+、-、=等运算符，
+都将函数声明转换成函数表达式，消除了javascript引擎识别函数表达式和函数声明的歧义，告诉javascript引擎这是一个函数表达式，
+不是函数声明，可以在后面加括号，并立即执行函数的代码。
